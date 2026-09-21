@@ -94,20 +94,19 @@ footer{padding:38px 0 55px;border-top:1px solid var(--line);font-size:.85rem;col
               <li>ruhig beobachten statt vorschnell bewerten</li>
               <li>praktische Impulse für euren Familienalltag</li>
             </ul>
-            <form class="email-form" action="https://formsubmit.co/desiree@reflexentwicklung.at" method="POST">
-              <input type="hidden" name="_subject" value="Eltern-Leitfaden angefordert – Reflex Entwicklung Selbsttest">
-              <input type="hidden" name="_template" value="table">
-              <input type="hidden" name="_next" value="https://reflexentwicklung.at/selbsttest-danke.html">
-              <input type="hidden" name="Quelle" value="Reflex Entwicklung – 2-Minuten-Orientierungscheck">
-              <input type="hidden" name="_autoresponse" value="Hallo und schön, dass ihr meinen Orientierungscheck genutzt habt. Wie versprochen findet ihr hier meinen kurzen Eltern-Leitfaden mit 5 Beobachtungsimpulsen für euren Alltag: https://reflexentwicklung.at/elternleitfaden-reflexentwicklung.pdf Eure Antworten aus dem Orientierungscheck wurden ausschließlich in eurem Browser ausgewertet und nicht an mich übertragen. Schaut euch den Leitfaden ganz in Ruhe an. Wenn ihr danach das Gefühl habt, dass ihr eure Beobachtungen gerne gemeinsam mit mir besprechen möchtet, ist das Erstgespräch kostenlos und unverbindlich. Liebe Grüße, Desireè Garbus · Reflex Entwicklung · desiree@reflexentwicklung.at · reflexentwicklung.at">
+            <form class="email-form" action="HIER_APPS_SCRIPT_WEBAPP_URL_EINTRAGEN" method="POST" id="guideForm">
+              <input type="hidden" name="started_at" id="startedAt" value="">
+              <div aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden">
+                <label>Website <input type="text" name="website" tabindex="-1" autocomplete="off"></label>
+              </div>
               <div class="form-row">
-                <div class="field"><label for="firstname">Vorname – optional</label><input id="firstname" name="Vorname" autocomplete="given-name"></div>
+                <div class="field"><label for="firstname">Vorname – optional</label><input id="firstname" name="firstname" autocomplete="given-name"></div>
                 <div class="field"><label for="email">E-Mail-Adresse *</label><input id="email" name="email" type="email" required autocomplete="email"></div>
               </div>
-              <label class="check"><input type="checkbox" name="Einwilligung_Leitfaden" value="Ja" required><span>Ich möchte den Eltern-Leitfaden per E-Mail erhalten und stimme der dafür erforderlichen Verarbeitung meiner E-Mail-Adresse zu. Die <a href="datenschutzerklaerung.html" target="_blank" rel="noopener">Datenschutzerklärung</a> habe ich gelesen.</span></label>
-              <label class="check"><input type="checkbox" name="Persoenliche_Kontaktaufnahme" value="Ja"><span>Optional: Ich darf euch zusätzlich persönlich per E-Mail kontaktieren, falls sich aus eurer Anfrage Fragen ergeben.</span></label>
+              <label class="check"><input type="checkbox" name="consent" value="yes" required><span>Ich möchte den Eltern-Leitfaden per E-Mail erhalten und stimme der dafür erforderlichen Verarbeitung meiner E-Mail-Adresse zu. Die <a href="datenschutzerklaerung.html" target="_blank" rel="noopener">Datenschutzerklärung</a> habe ich gelesen.</span></label>
+              <label class="check"><input type="checkbox" name="contact_ok" value="yes"><span>Optional: Desireè darf mich zusätzlich persönlich per E-Mail kontaktieren. Meine Antworten und mein Testergebnis werden auch dabei nicht übertragen.</span></label>
               <button class="btn btn-primary" type="submit">Eltern-Leitfaden kostenlos senden</button>
-              <p class="micro">Keine Newsletter-Anmeldung. Keine Testantworten werden mitgesendet.</p>
+              <p class="micro">Keine Newsletter-Anmeldung. Keine Testantworten werden mitgesendet. Die E-Mail kommt direkt von Reflex Entwicklung.</p>
             </form>
             <div class="no-store"><b>✓</b><span>Eure Antworten auf die zehn Fragen und die daraus errechnete Einordnung bleiben auf eurem Gerät im Browser. Ich bekomme diese Angaben nicht übermittelt und speichere sie auch nicht.</span></div>
           </div>
@@ -172,6 +171,9 @@ startBtn.addEventListener('click',()=>{index=0;answers=[];renderQuestion();});
 backBtn.addEventListener('click',()=>{if(index>0){index--;renderQuestion();}});
 restartBtn.addEventListener('click',()=>{index=0;answers=[];showScreen(startScreen);updateProgress(0);window.scrollTo({top:Math.max(0,document.getElementById('test').offsetTop-70),behavior:'smooth'});});
 updateProgress(0);
+</script>
+<script>
+document.getElementById('startedAt').value = String(Date.now());
 </script>
 </body>
 </html>

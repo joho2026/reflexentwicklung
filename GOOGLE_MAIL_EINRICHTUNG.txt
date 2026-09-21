@@ -1,0 +1,74 @@
+REFLEX ENTWICKLUNG – EIGENER MAILABSENDER
+Einmalige Einrichtung für den Eltern-Leitfaden
+
+ZIEL
+Die Mail soll nicht mehr von „FormSubmit“ kommen, sondern direkt vom Google-Workspace-Konto:
+
+Absendername: Reflex Entwicklung – Desireè Garbus
+Absenderadresse: desiree@reflexentwicklung.at
+Betreff: Dein Eltern-Leitfaden | Reflex Entwicklung
+
+WARUM IST EIN EINMALIGER GOOGLE-SCHRITT NÖTIG?
+Die Website liegt statisch auf GitHub Pages. Zugangsdaten des Mailkontos dürfen niemals in einer öffentlichen HTML-Datei gespeichert werden. Deshalb läuft der Versand über ein kleines Google Apps Script im Konto von Desireè.
+
+SCHRITT 1 – Apps Script anlegen
+1. Mit desiree@reflexentwicklung.at bei Google anmelden.
+2. https://script.google.com öffnen.
+3. „Neues Projekt“ anklicken.
+4. Projekt z.B. „Reflex Entwicklung Eltern-Leitfaden“ nennen.
+5. Den Inhalt von google-apps-script/Code.gs vollständig in Code.gs kopieren.
+6. Speichern.
+
+SCHRITT 2 – einmal autorisieren
+1. Im Funktions-Dropdown testweise „doGet“ auswählen.
+2. „Ausführen“ anklicken.
+3. Google verlangt Berechtigungen. Mit desiree@reflexentwicklung.at bestätigen.
+   Der Code benötigt Gmail-Zugriff, weil er im Namen dieses Kontos den angeforderten Leitfaden versendet.
+
+SCHRITT 3 – als Web-App bereitstellen
+1. Oben rechts „Bereitstellen“ → „Neue Bereitstellung“.
+2. Typ: „Web-App“.
+3. Beschreibung: „Eltern-Leitfaden“.
+4. „Ausführen als“: ICH / desiree@reflexentwicklung.at.
+5. „Wer hat Zugriff“: Jeder.
+6. „Bereitstellen“.
+7. Die erzeugte Web-App-URL kopieren. Sie endet normalerweise auf /exec.
+
+SCHRITT 4 – genau EINE Stelle in selbsttest.html ändern
+In selbsttest.html nach folgendem Text suchen:
+
+HIER_APPS_SCRIPT_WEBAPP_URL_EINTRAGEN
+
+Diesen Text vollständig durch die eben kopierte /exec-URL ersetzen.
+Die Anführungszeichen rundherum stehen bereits in der Datei und bleiben bestehen.
+
+Beispiel:
+action="https://script.google.com/macros/s/ABC123.../exec"
+
+SCHRITT 5 – Website hochladen
+Die geänderte selbsttest.html zusammen mit dem restlichen Website-Paket hochladen.
+Die FormSubmit-Autoresponse ist in dieser Version entfernt.
+
+SCHRITT 6 – testen
+1. https://reflexentwicklung.at/selbsttest.html öffnen.
+2. Test durchklicken.
+3. Eigene E-Mail-Adresse eintragen.
+4. Leitfaden anfordern.
+5. Im Posteingang prüfen:
+   Absender: Reflex Entwicklung – Desireè Garbus
+   Von: desiree@reflexentwicklung.at
+   Betreff: Dein Eltern-Leitfaden | Reflex Entwicklung
+6. Auf Antworten prüfen: Reply-To ist desiree@reflexentwicklung.at.
+
+SICHERHEIT
+Das Script:
+- versendet nur den fest hinterlegten Leitfaden-Link;
+- übernimmt KEINE Testantworten oder Testergebnisse;
+- besitzt ein unsichtbares Honeypot-Feld gegen einfache Bots;
+- blockiert extrem schnelle Bot-Submissions;
+- versendet an dieselbe E-Mail-Adresse nur einmal innerhalb von 30 Minuten;
+- hat zusätzlich eine globale Obergrenze von 50 Leitfaden-Mails pro Tag;
+- sendet Desireè nur dann eine interne Kontaktinfo, wenn die Person die optionale Kontakt-Checkbox ausdrücklich aktiviert.
+
+WICHTIG
+Wenn der Apps-Script-Code später geändert wird, muss bei Apps Script je nach Bereitstellungsart eine neue Version der Web-App bereitgestellt werden, damit die Änderung live ist.
