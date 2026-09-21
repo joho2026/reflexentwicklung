@@ -94,7 +94,7 @@ footer{padding:38px 0 55px;border-top:1px solid var(--line);font-size:.85rem;col
               <li>ruhig beobachten statt vorschnell bewerten</li>
               <li>praktische Impulse für euren Familienalltag</li>
             </ul>
-            <form class="email-form" action="https://script.google.com/macros/s/AKfycbxbOfpRRtz6AyIQ8wD4BHv6RDlHi7KqEMQ2zpyxgbjlUISQ6rxfcKvbM747S6qMtnA3/exec" method="POST" id="guideForm">
+            <form class="email-form" action="https://script.google.com/macros/s/AKfycbxbOfpRRtz6AyIQ8wD4BHv6RDlHi7KqEMQ2zpyxgbjlUISQ6rxfcKvbM747S6qMtnA3/exec" method="POST" id="guideForm" target="guideMailFrame">
               <input type="hidden" name="started_at" id="startedAt" value="">
               <div aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden">
                 <label>Website <input type="text" name="website" tabindex="-1" autocomplete="off"></label>
@@ -108,6 +108,7 @@ footer{padding:38px 0 55px;border-top:1px solid var(--line);font-size:.85rem;col
               <button class="btn btn-primary" type="submit">Eltern-Leitfaden kostenlos senden</button>
               <p class="micro">Keine Newsletter-Anmeldung. Keine Testantworten werden mitgesendet. Die E-Mail kommt direkt von Reflex Entwicklung.</p>
             </form>
+            <iframe name="guideMailFrame" id="guideMailFrame" title="Mailversand" style="display:none"></iframe>
             <div class="no-store"><b>✓</b><span>Eure Antworten auf die zehn Fragen und die daraus errechnete Einordnung bleiben auf eurem Gerät im Browser. Ich bekomme diese Angaben nicht übermittelt und speichere sie auch nicht.</span></div>
           </div>
         </section>
@@ -173,7 +174,28 @@ restartBtn.addEventListener('click',()=>{index=0;answers=[];showScreen(startScre
 updateProgress(0);
 </script>
 <script>
-document.getElementById('startedAt').value = String(Date.now());
+(function(){
+  const form = document.getElementById('guideForm');
+  const frame = document.getElementById('guideMailFrame');
+  const startedAt = document.getElementById('startedAt');
+  let submitted = false;
+
+  if (startedAt) startedAt.value = String(Date.now());
+
+  form.addEventListener('submit', function(){
+    submitted = true;
+    const btn = form.querySelector('button[type="submit"]');
+    if (btn) {
+      btn.disabled = true;
+      btn.textContent = 'Leitfaden wird versendet …';
+    }
+  });
+
+  frame.addEventListener('load', function(){
+    if (!submitted) return;
+    window.location.href = 'https://reflexentwicklung.at/selbsttest-danke.html';
+  });
+})();
 </script>
 </body>
 </html>
